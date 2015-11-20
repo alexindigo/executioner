@@ -1,0 +1,40 @@
+{
+  "name": "executioner",
+  "version": "1.0.0",
+  "description": "Executes provided shell command with supplied arguments",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "cover": "istanbul cover test.js",
+    "check": "istanbul check-coverage coverage/coverage.json",
+    "lint": "eslint *.js"
+  },
+  "pre-commit": [
+    "lint",
+    "cover",
+    "check"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexindigo/executioner.git"
+  },
+  "keywords": [
+    "exec",
+    "shell",
+    "arguments",
+    "command",
+    "cli",
+    "execute"
+  ],
+  "author": "Alex Indigo <iam@alexindigo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexindigo/executioner/issues"
+  },
+  "homepage": "https://github.com/alexindigo/executioner#readme",
+  "devDependencies": {
+    "eslint": "^1.9.0",
+    "istanbul": "^0.4.0",
+    "pre-commit": "^1.1.2"
+  }
+}
