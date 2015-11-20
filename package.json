@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
+    "lint": "eslint *.js",
     "cover": "istanbul cover test.js",
-    "check": "istanbul check-coverage coverage/coverage.json",
-    "lint": "eslint *.js"
+    "check": "istanbul check-coverage coverage/coverage.json"
   },
   "pre-commit": [
     "lint",
