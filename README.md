@@ -1,6 +1,8 @@
 # Executioner
 Executes provided shell command with supplied arguments
 
+*Notice of change of ownership: Starting version 1.0.0 this package has changed it's owner and goals. Old version (0.0.1) is still available on npm via `npm install executioner@0.0.1`. Thank you.*
+
 ## Install
 
 ```
