@@ -1,6 +1,9 @@
 # Executioner
 Executes provided shell command with supplied arguments
 
+[![Build Status](https://img.shields.io/travis/alexindigo/executioner/master.svg?style=flat-square)](https://travis-ci.org/alexindigo/executioner)
+[![Coverage Status](https://img.shields.io/coveralls/alexindigo/executioner/master.svg?style=flat-square)](https://coveralls.io/github/alexindigo/executioner?branch=master)
+
 *Notice of change of ownership: Starting version 1.0.0 this package has changed it's owner and goals. Old version (0.0.1) is still available on npm via `npm install executioner@0.0.1`. Thank you.*
 
 ## Install
