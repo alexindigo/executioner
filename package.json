@@ -4,14 +4,14 @@
   "description": "Executes provided shell command with supplied arguments",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "istanbul cover test.js",
     "lint": "eslint *.js",
-    "cover": "istanbul cover test.js",
+    "debug": "node test.js",
     "check": "istanbul check-coverage coverage/coverage.json"
   },
   "pre-commit": [
     "lint",
-    "cover",
+    "test",
     "check"
   ],
   "repository": {
