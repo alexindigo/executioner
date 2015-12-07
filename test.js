@@ -1,6 +1,7 @@
 var assert = require('assert');
 var executioner = require('./');
 var originalOptions;
+var job;
 
 // simple command
 executioner('echo A', {}, function(err, result)
@@ -95,10 +96,10 @@ executioner('false', {}, {shell: '/bin/bash'}, function(err, result)
 // exposes executing shell
 // read custom shell from global options
 originalOptions = executioner.options;
-executioner.options = {shell: '/bin/bash'};
+executioner.options = {shell: '/bin/csh'};
 executioner('false', {}, function(err, result)
 {
-  assert.equal(err.message, 'Command failed: /bin/bash -c false');
+  assert.equal(err.message, 'Command failed: /bin/csh -c false');
   assert.equal(result, undefined);
 });
 executioner.options = originalOptions;
@@ -114,3 +115,40 @@ executioner('false', {}, function(err, result)
   assert.equal(result, undefined);
 });
 executioner.options = originalOptions;
+
+// terminates ongoing process
+job = executioner('echo Z; sleep 1; echo A', {}, function(err, result)
+{
+  assert.ok(err.terminated);
+  assert.equal(result, 'Z');
+});
+setTimeout(function(child)
+{
+  executioner.terminate(child);
+}, 50, job);
+
+// does nothing if called with some bogus thing
+executioner.terminate({});
+
+// preserves prefix upon termination
+// terminates ongoing process
+job = executioner({died: 'echo X; sleep 1; echo B'}, {}, function(err, result)
+{
+  assert.ok(err.terminated);
+  assert.equal(result, 'died: X');
+});
+setTimeout(function(child)
+{
+  executioner.terminate(child);
+}, 50, job);
+
+// terminates set of commands mid flight
+job = executioner(['echo 123', 'echo A; sleep 1; echo Z', 'echo 789', 'never gets a chance'], {}, function(err, result)
+{
+  assert.ok(err.terminated);
+  assert.deepEqual(result, ['123', 'A']);
+});
+setTimeout(function(child)
+{
+  executioner.terminate(child);
+}, 100, job);

@@ -14,13 +14,13 @@ npm install executioner --save
 
 ## Examples
 
-```
+```javascript
 var executioner = require('executioner');
 ```
 
 Simple command:
 
-```
+```javascript
 executioner('echo A', {}, function(err, result)
 {
   assert.equal(result, 'A');
@@ -29,7 +29,7 @@ executioner('echo A', {}, function(err, result)
 
 Combined command:
 
-```
+```javascript
 executioner(['echo A', 'echo B', 'echo C'], {}, function(err, result)
 {
   assert.deepEqual(result, ['A', 'B', 'C']);
@@ -38,7 +38,7 @@ executioner(['echo A', 'echo B', 'echo C'], {}, function(err, result)
 
 Parameterized command:
 
-```
+```javascript
 executioner(['echo A-${abc}', 'echo B-${abc}', 'echo C-${xyz}', 'echo D-${xyz}'], {abc: '123', xyz: '789'}, function(err, result)
 {
   assert.deepEqual(result, ['A-123', 'B-123', 'C-789', 'D-789']);
@@ -47,7 +47,7 @@ executioner(['echo A-${abc}', 'echo B-${abc}', 'echo C-${xyz}', 'echo D-${xyz}']
 
 Named list of commands:
 
-```
+```javascript
 executioner({'Letter A': 'echo A', 'Letter B': 'echo B', 'Letter C': 'echo C'}, {}, function(err, result)
 {
   assert.deepEqual(result, ['Letter A: A', 'Letter B: B', 'Letter C: C']);
@@ -56,7 +56,7 @@ executioner({'Letter A': 'echo A', 'Letter B': 'echo B', 'Letter C': 'echo C'}, 
 
 Non-string parameters:
 
-```
+```javascript
 executioner(['echo A:${ok}:', 'echo B:${no}:', 'echo C:${nay}:', 'echo D:${never}:'], {ok: true, no: false, nay: null, never: undefined}, function(err, result)
 {
   assert.deepEqual(result, ['A:1:', 'B::', 'C::', 'D::']);
@@ -65,7 +65,7 @@ executioner(['echo A:${ok}:', 'echo B:${no}:', 'echo C:${nay}:', 'echo D:${never
 
 Error messaging:
 
-```
+```javascript
 executioner('echo ABC && echo XYZ 1>&2 && false', {}, function(err, result)
 {
   assert.equal(err.message, 'Command failed: /bin/sh -c echo ABC && echo XYZ 1>&2 && false\nXYZ');
@@ -73,6 +73,22 @@ executioner('echo ABC && echo XYZ 1>&2 && false', {}, function(err, result)
   assert.equal(err.stderr, 'XYZ');
   assert.equal(result, undefined);
 });
+```
+
+Job termination:
+
+```javascript
+var job = executioner('echo ABC; sleep 5; echo XYZ', {}, function(err, result)
+{
+  assert.ok(err.terminated);
+  // Partial output
+  assert.equal(result, 'ABC');
+});
+
+setTimeout(function()
+{
+  executioner.terminate(job);
+}, 100);
 ```
 
 For more examples check out [`test.js`](test.js).
