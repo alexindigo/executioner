@@ -96,10 +96,10 @@ executioner('false', {}, {shell: '/bin/bash'}, function(err, result)
 // exposes executing shell
 // read custom shell from global options
 originalOptions = executioner.options;
-executioner.options = {shell: '/bin/csh'};
+executioner.options = {shell: '/bin/sh'};
 executioner('false', {}, function(err, result)
 {
-  assert.equal(err.message, 'Command failed: /bin/csh -c false');
+  assert.equal(err.message, 'Command failed: /bin/sh -c false');
   assert.equal(result, undefined);
 });
 executioner.options = originalOptions;
