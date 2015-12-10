@@ -1,11 +1,11 @@
 {
   "name": "executioner",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Executes provided shell command with supplied arguments",
   "main": "index.js",
   "scripts": {
     "test": "istanbul cover test.js",
-    "lint": "eslint *.js",
+    "lint": "eslint *.js lib/*.js",
     "debug": "node test.js",
     "check": "istanbul check-coverage coverage/coverage.json"
   },
@@ -34,8 +34,11 @@
   "homepage": "https://github.com/alexindigo/executioner#readme",
   "devDependencies": {
     "coveralls": "^2.11.4",
-    "eslint": "^1.9.0",
-    "istanbul": "^0.4.0",
+    "eslint": "^1.10.3",
+    "istanbul": "^0.4.1",
     "pre-commit": "^1.1.2"
+  },
+  "dependencies": {
+    "xtend": "^4.0.1"
   }
 }

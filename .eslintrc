@@ -13,10 +13,14 @@
         "return": "returns"
       }
     }],
+    "require-jsdoc": [2, {
+      "require": {
+        "FunctionDeclaration": true
+      }
+    }],
+    "no-unused-vars": 2,
     "key-spacing": 0,
     "strict": 0,
-    "no-underscore-dangle": 0,
-    "no-use-before-define": 0,
     "dot-notation": 0,
     "eol-last": 0,
     "no-new": 0,

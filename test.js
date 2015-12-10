@@ -60,9 +60,9 @@ executioner(['echo A:${no}:', 'echo B:${nay}:', 'echo C:${never}:'], {no: undefi
 });
 
 // list of commands with non-primitive parameter value
-executioner(['echo A:${arr}'], {arr: [1, 2, 3]}, function(err, result)
+executioner(['echo A:${arr}'], {pre: 'pre', arr: [1, 2, 3], brr: 'legit'}, function(err, result)
 {
-  assert.equal(err.message, 'Parameters should be primitive values [arr] typeof [object]');
+  assert.equal(err.message, 'Parameters should be a primitive value.');
   assert.equal(result, undefined);
 });
 
