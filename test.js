@@ -45,6 +45,20 @@ executioner({'Letter A': 'echo A'}, {}, function(err, result)
   assert.equal(result, 'Letter A: A');
 });
 
+// prefixed commands
+executioner(['A', 'B', 'C'], {}, {cmdPrefix: 'echo prefixed'}, function(err, result)
+{
+  assert.ifError(err);
+  assert.deepEqual(result, ['prefixed A', 'prefixed B', 'prefixed C']);
+});
+
+// prefixed with variables
+executioner(['A-${abc}', 'B', 'C+${abc}'], {abc: '123'}, {cmdPrefix: 'echo ${abc}=prefixed'}, function(err, result)
+{
+  assert.ifError(err);
+  assert.deepEqual(result, ['123=prefixed A-123', '123=prefixed B', '123=prefixed C+123']);
+});
+
 // list of commands with boolean parameters
 executioner(['echo A:${ok}', 'echo B:${not}:${ok}', 'echo C:${not}'], {ok: true, not: false}, function(err, result)
 {
