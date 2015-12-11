@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/alexindigo/executioner#readme",
   "devDependencies": {
+    "codecov.io": "^0.1.6",
     "coveralls": "^2.11.4",
     "eslint": "^1.10.3",
     "istanbul": "^0.4.1",
