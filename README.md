@@ -54,6 +54,15 @@ executioner({'Letter A': 'echo A', 'Letter B': 'echo B', 'Letter C': 'echo C'}, 
 });
 ```
 
+Prefixed commands:
+
+```javascript
+executioner(['A', 'B', 'C'], {}, {cmdPrefix: 'echo prefixed'}, function(err, result)
+{
+  assert.deepEqual(result, ['prefixed A', 'prefixed B', 'prefixed C']);
+});
+```
+
 Non-string parameters:
 
 ```javascript
