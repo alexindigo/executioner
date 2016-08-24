@@ -1,7 +1,7 @@
 /**
  * Executes provided command with supplied arguments
  */
-var extend    = require('xtend/immutable')
+var extend    = require('mixly/immutable')
   , run       = require('./lib/run.js')
   , terminate = require('./lib/terminate.js')
   ;
@@ -35,7 +35,7 @@ function executioner(commands, params, options, callback)
   // clone params, to mess with them without side effects
   params = extend(params);
   // copy options and with specified shell
-  execOptions = extend(executioner.options || {}, options);
+  execOptions = extend(executioner.options || {}, options || {});
 
   // use it as array
   if (typeof commands == 'string')

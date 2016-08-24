@@ -1,13 +1,13 @@
 var assert      = require('assert');
 var executioner = require('../');
-var tests       = require('./tests.json');
-var totalTests  = tests.length;
+var testsToRun  = require('./tests.json');
+var totalTests  = testsToRun.length;
 
 // execute tests one by one
-runTest(tests, function()
+runTest(testsToRun, function()
 {
-  assert.notEqual(tests.length, totalTests);
-  console.log('Done with tests.');
+  assert.notEqual(testsToRun.length, totalTests);
+  console.log('Done with tests (', testsToRun.length, ').');
 });
 
 /**
@@ -75,7 +75,7 @@ function runTest(tests, callback)
   runner = executioner.bind(this, test.command, test.params || {});
 
   // options is optional element
-  if (test.options)
+  if ('options' in test)
   {
     runner = runner.bind(this, test.options);
   }

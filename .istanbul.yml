@@ -4,7 +4,7 @@ instrumentation:
     extensions:
         - .js
     default-excludes: true
-    excludes: ['test.js']
+    excludes: ['tests/']
 reporting:
     print: summary
     reports:

@@ -1,5 +1,6 @@
-# Executioner
-Executes provided shell command with supplied arguments
+# executioner
+
+Executes provided shell commands with supplied arguments. Supports parallel and templated commands.
 
 [![Build Status](https://img.shields.io/travis/alexindigo/executioner/master.svg?style=flat-square)](https://travis-ci.org/alexindigo/executioner)
 [![Coverage Status](https://img.shields.io/coveralls/alexindigo/executioner/master.svg?style=flat-square)](https://coveralls.io/github/alexindigo/executioner?branch=master)
@@ -9,7 +10,7 @@ Executes provided shell command with supplied arguments
 ## Install
 
 ```
-npm install executioner --save
+npm install --save executioner
 ```
 
 ## Examples
@@ -77,7 +78,7 @@ Error messaging:
 ```javascript
 executioner('echo ABC && echo XYZ 1>&2 && false', {}, function(err, result)
 {
-  assert.equal(err.message, 'Command failed: /bin/sh -c echo ABC && echo XYZ 1>&2 && false\nXYZ');
+  assert.equal(err.message, 'Command failed: echo ABC && echo XYZ 1>&2 && false\nXYZ');
   assert.equal(err.stdout, 'ABC');
   assert.equal(err.stderr, 'XYZ');
   assert.equal(result, undefined);
@@ -100,8 +101,8 @@ setTimeout(function()
 }, 100);
 ```
 
-For more examples check out [`test.js`](test.js).
+For more examples check out [`tests/tests.json`](tests/tests.json).
 
 ## License
 
-[MIT](LICENSE)
+Executioner is released under the [MIT](LICENSE) license.

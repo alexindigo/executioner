@@ -97,6 +97,38 @@
   },
 
   {
+    "description": "Makes sure default shell is not the same with custom test shell",
+    "command": "echo $0",
+    "expected":
+    {
+      "result": "/bin/sh"
+    }
+  },
+
+  {
+    "description": "Reads custom shell from global options",
+    "executioner":
+    {
+      "options": {"shell": "/bin/bash"}
+    },
+    "command": "echo $0",
+    "expected":
+    {
+      "result": "/bin/bash"
+    }
+  },
+
+  {
+    "description": "Custom shell as command options",
+    "command": "echo $0",
+    "options": {"shell": "/bin/bash"},
+    "expected":
+    {
+      "result": "/bin/bash"
+    }
+  },
+
+  {
     "description": "List of commands with non-primitive parameter value",
     "command": ["echo A:${arr}"],
     "params": {"pre": "pre", "arr": [1, 2, 3], "brr": "legit"},
@@ -116,7 +148,7 @@
     {
       "error":
       {
-        "message": "Command failed: /bin/sh -c echo ABC && echo XYZ 1>&2 && false\nXYZ",
+        "message": "Command failed: echo ABC && echo XYZ 1>&2 && false\nXYZ",
         "stdout": "ABC",
         "stderr": "XYZ"
       }
@@ -124,7 +156,7 @@
   },
 
   {
-    "description": "Set of commands with erroneous member, exposes executing shell. Reads custom shell from global options",
+    "description": "Set of commands with erroneous member. Reads custom shell from global options",
     "executioner":
     {
       "options": {"shell": "/bin/bash"}
@@ -134,7 +166,7 @@
     {
       "error":
       {
-        "message": "Command failed: /bin/bash -c false",
+        "message": "Command failed: false",
         "stdout": "",
         "stderr": ""
       }
@@ -142,20 +174,20 @@
   },
 
   {
-    "description": "Simple command with erroneous result, exposes executing shell",
+    "description": "Simple command with erroneous result",
     "command": "false",
     "options": {"shell": "/bin/bash"},
     "expected":
     {
       "error":
       {
-        "message": "Command failed: /bin/bash -c false"
+        "message": "Command failed: false"
       }
     }
   },
 
   {
-    "description": "Simple command with erroneous result, exposes executing shell. Handles no global options",
+    "description": "Simple command with erroneous result. Handles no global options",
     "executioner":
     {
       "options": null
@@ -165,8 +197,18 @@
     {
       "error":
       {
-        "message": "Command failed: /bin/sh -c false"
+        "message": "Command failed: false"
       }
+    }
+  },
+
+  {
+    "description": "Simple command with falsy options",
+    "command": "echo OK",
+    "options": false,
+    "expected":
+    {
+      "result": "OK"
     }
   },
 

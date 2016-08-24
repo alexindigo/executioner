@@ -1,17 +1,18 @@
 {
   "name": "executioner",
   "version": "1.2.0",
-  "description": "Executes provided shell command with supplied arguments",
+  "description": "Executes provided shell commands with supplied arguments. Supports parallel and templated commands",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover tests/run.js",
     "lint": "eslint *.js lib/*.js tests/*.js",
-    "debug": "node tests/run.js",
-    "check": "istanbul check-coverage coverage/coverage.json"
+    "test": "node tests/run.js",
+    "cover": "istanbul cover tests/run.js",
+    "check": "istanbul check-coverage coverage/coverage.json",
+    "files": "pkgfiles --sort=name"
   },
   "pre-commit": [
     "lint",
-    "test",
+    "cover",
     "check"
   ],
   "repository": {
@@ -33,13 +34,13 @@
   },
   "homepage": "https://github.com/alexindigo/executioner#readme",
   "devDependencies": {
-    "codecov.io": "^0.1.6",
-    "coveralls": "^2.11.4",
-    "eslint": "^1.10.3",
-    "istanbul": "^0.4.1",
-    "pre-commit": "^1.1.2"
+    "coveralls": "^2.11.12",
+    "eslint": "^3.3.1",
+    "istanbul": "^0.4.5",
+    "pkgfiles": "^2.3.0",
+    "pre-commit": "^1.1.3"
   },
   "dependencies": {
-    "xtend": "^4.0.1"
+    "mixly": "^1.0.0"
   }
 }
