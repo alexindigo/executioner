@@ -1,4 +1,4 @@
-# executioner
+# executioner  [![NPM Module](https://img.shields.io/npm/v/executioner.svg?style=flat)](https://www.npmjs.com/package/executioner)
 
 Executes provided shell commands with supplied arguments. Supports parallel and templated commands.
 
